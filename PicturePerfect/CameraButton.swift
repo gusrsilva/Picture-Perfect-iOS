@@ -18,12 +18,12 @@ class CameraButton: UIButton {
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 0.5*bounds.size.width).cgPath
-            shadowLayer.fillColor = UIColor.white.cgColor
+            shadowLayer.fillColor = backgroundColor?.cgColor
             
-            shadowLayer.shadowColor = UIColor.darkGray.cgColor
+            shadowLayer.shadowColor = UIColor.black.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 5.0, height: 5.0)
-            shadowLayer.shadowOpacity = 0.8
+            shadowLayer.shadowOpacity = 0.25
             shadowLayer.shadowRadius = 5
             
             layer.insertSublayer(shadowLayer, at: 0)

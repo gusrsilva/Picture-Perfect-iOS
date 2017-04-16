@@ -49,7 +49,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         updateCameraSelection()
         setupVideoProcessing()
         setupCameraPreview()
-
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

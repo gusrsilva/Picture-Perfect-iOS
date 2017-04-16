@@ -12,10 +12,15 @@ import GoogleMobileVision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    var faceDetector: GMVDetector?
+    let detector = CIDetector(ofType: CIDetectorTypeFace, context: CIContext(), options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
+
     var videoDataOutput = AVCaptureVideoDataOutput()
     var videoDataOutputQueue: DispatchQueue?
     var imageSet: Bool = false
+    
+    let devicePosition: AVCaptureDevicePosition = AVCaptureDevicePosition.front // TODO: Update when switching is added
+    let deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait   // TODO: Allow rotation?
+
     
     // The captured image
     var selectedImage = UIImage()
@@ -46,9 +51,16 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         updateCameraSelection()
         setupVideoProcessing()
         setupCameraPreview()
-        // TODO: Add GMVDetectorFaceLandmarkType: GMVDetectorFaceLandmark.all to options
-        self.faceDetector = GMVDetector(ofType: GMVDetectorTypeFace, options: [GMVDetectorFaceTrackingEnabled: true, GMVDetectorFaceMinSize: 0.3])
-        self.imageView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+
+        self.imageView.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        
+//        let ciimage = CIImage(image: #imageLiteral(resourceName: "sample"))!
+//        let features = detector.features(in: ciimage, options: [CIDetectorEyeBlink: true, CIDetectorSmile: true]) as! [CIFaceFeature]
+//        for f in features {
+//            print("smile: \(f.mouthPosition) left eye: \(f.leftEyePosition) right eye \(f.rightEyePosition)")
+//            
+//        }
+//        print("Detected \(features.count) features")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,26 +88,51 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-        if let buffer = sampleBuffer {
-            //            let image: UIImage = GMVUtility.sampleBufferTo32RGBA(buffer)
-            
-            let myPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-            let myCIimage         = CIImage(cvPixelBuffer: myPixelBuffer!)
-            let image        = UIImage(ciImage: myCIimage)
-            
-            let devicePosition: AVCaptureDevicePosition = AVCaptureDevicePosition.front // TODO: Update when switching is added
-            let deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait
-            let orientation: GMVImageOrientation = GMVUtility.imageOrientation(from: deviceOrientation, with: devicePosition, defaultDeviceOrientation: deviceOrientation)
-            let options = [GMVDetectorImageOrientation: orientation]
-            if let faces = self.faceDetector?.features(in: image, options: options) {
-                if(faces.count > 0) {
-                    print("Detected \(faces.count) faces!")
+        if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
+            let ciimage = CIImage(cvImageBuffer: imageBuffer)
+            let orientation = getCIDetectorImageOrientation(from: self.deviceOrientation, self.devicePosition)
+            let features = detector.features(in: ciimage, options: [CIDetectorEyeBlink: true, CIDetectorSmile: true, CIDetectorImageOrientation: orientation]) as! [CIFaceFeature]
+            for f in features {
+                if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
+                    // Good picture!
                 }
             }
+            
         } else {
             print("Error with buffer!")
         }
         
+    }
+    
+    func getCIDetectorImageOrientation(from deviceOrientation: UIDeviceOrientation, _ cameraPos: AVCaptureDevicePosition ) -> Int {
+        
+        var exifOrientation = 0
+        let isUsingFrontFacingCamera: Bool = cameraPos == AVCaptureDevicePosition.front
+        switch (deviceOrientation) {
+        case UIDeviceOrientation.portraitUpsideDown:  // Device oriented vertically, home button on the top
+            exifOrientation = 8;
+            break;
+        case UIDeviceOrientation.landscapeLeft:       // Device oriented horizontally, home button on the right
+            if (isUsingFrontFacingCamera) {
+                exifOrientation = 3;
+            }
+            else {
+                exifOrientation = 1;
+            }
+            break;
+        case UIDeviceOrientation.landscapeRight:      // Device oriented horizontally, home button on the left
+            if (isUsingFrontFacingCamera) {
+                exifOrientation = 1;
+            }
+            else {
+                exifOrientation = 3;
+            }
+            break;
+        default:
+            exifOrientation = 6;
+            break;
+        }
+        return exifOrientation
     }
     
     

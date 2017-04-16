@@ -52,14 +52,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         setupCameraPreview()
 
         self.imageView.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-        
-//        let ciimage = CIImage(image: #imageLiteral(resourceName: "sample"))!
-//        let features = detector.features(in: ciimage, options: [CIDetectorEyeBlink: true, CIDetectorSmile: true]) as! [CIFaceFeature]
-//        for f in features {
-//            print("smile: \(f.mouthPosition) left eye: \(f.leftEyePosition) right eye \(f.rightEyePosition)")
-//            
-//        }
-//        print("Detected \(features.count) features")
     }
     
     override func viewDidAppear(_ animated: Bool) {

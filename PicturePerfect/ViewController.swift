@@ -208,11 +208,29 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         return nil
     }
     
+    func animatePress(forButton button: UIButton, onComplete: ((Void) -> Swift.Void)? = nil) {
+        UIView.animate(withDuration: 0.1,
+                       animations: {
+                        button.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.1) {
+                            button.transform = CGAffineTransform.identity
+                            if let onComplete = onComplete {
+                                onComplete()
+                            }
+                        }
+                        
+        })
+    }
+    
     @IBAction func moreOptionsPressed(_ sender: UIButton) {
+        animatePress(forButton: sender)
     }
     
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
         detectionActive = true
+        animatePress(forButton: sender)
     }
     
     @IBAction func flipCameraButtonPressed(_ sender: UIButton) {
@@ -221,7 +239,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         } else {
             self.cameraPosition = AVCaptureDevicePosition.front
         }
-        updateCameraSelection()
+        animatePress(forButton: sender, onComplete: {self.updateCameraSelection()})
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

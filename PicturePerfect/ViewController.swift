@@ -36,22 +36,20 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     // Object used to capture a single photo from our capture device
     let photoOutput = AVCapturePhotoOutput()
     
-    @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var previewHolder: UIView!
+    @IBOutlet weak var cameraButton: CameraButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.videoDataOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
         
         
-        self.captureSession.sessionPreset = AVCaptureSessionPresetMedium
+        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
         updateCameraSelection()
         setupVideoProcessing()
         setupCameraPreview()
 
-        self.imageView.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,26 +26,32 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fF4-NU-iWS">
-                                <rect key="frame" x="236" y="20" width="123" height="170"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lik-e0-Sqe" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
+                                <rect key="frame" x="137" y="525" width="100" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.93367225791666664" blue="0.56963433159722221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="123" id="TJn-rl-zBn"/>
+                                    <constraint firstAttribute="height" constant="100" id="3lB-jY-NMJ"/>
+                                    <constraint firstAttribute="width" secondItem="Lik-e0-Sqe" secondAttribute="height" multiplier="1:1" id="Kge-wZ-zrM"/>
                                 </constraints>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="😀">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Lik-e0-Sqe" firstAttribute="centerX" secondItem="aAq-7n-Svt" secondAttribute="centerX" id="A6T-ON-yzj"/>
                             <constraint firstItem="aAq-7n-Svt" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="EBZ-Ap-aIM"/>
-                            <constraint firstItem="fF4-NU-iWS" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="FKW-ag-d9B"/>
                             <constraint firstItem="aAq-7n-Svt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="G7E-0C-1Kw"/>
                             <constraint firstAttribute="trailing" secondItem="aAq-7n-Svt" secondAttribute="trailing" id="Ijd-47-PsN"/>
+                            <constraint firstItem="Lik-e0-Sqe" firstAttribute="top" secondItem="aAq-7n-Svt" secondAttribute="bottom" constant="-142" id="Ivk-Ep-YX5"/>
                             <constraint firstItem="aAq-7n-Svt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="JVo-hS-wAD"/>
-                            <constraint firstItem="fF4-NU-iWS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fhq-pN-cMc"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fF4-NU-iWS" secondAttribute="bottom" constant="477" id="l6O-pF-n0A"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="fF4-NU-iWS" id="9L8-3v-vmh"/>
+                        <outlet property="cameraButton" destination="Lik-e0-Sqe" id="IVU-dZ-3Wp"/>
                         <outlet property="previewHolder" destination="aAq-7n-Svt" id="do7-lr-deK"/>
                     </connections>
                 </viewController>

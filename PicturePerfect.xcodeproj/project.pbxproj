@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		161261011EA3043300655537 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161261001EA3043300655537 /* CameraButton.swift */; };
 		16A9DF671E9F4B770048A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9DF661E9F4B770048A1A7 /* AppDelegate.swift */; };
 		16A9DF691E9F4B770048A1A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9DF681E9F4B770048A1A7 /* ViewController.swift */; };
 		16A9DF6C1E9F4B770048A1A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A9DF6A1E9F4B770048A1A7 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		04B7D4EE0176ECFE8FD4F920 /* Pods-PicturePerfect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicturePerfect.release.xcconfig"; path = "Pods/Target Support Files/Pods-PicturePerfect/Pods-PicturePerfect.release.xcconfig"; sourceTree = "<group>"; };
+		161261001EA3043300655537 /* CameraButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 		16A9DF631E9F4B770048A1A7 /* PicturePerfect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicturePerfect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16A9DF661E9F4B770048A1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16A9DF681E9F4B770048A1A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				16A9DF721E9F4B770048A1A7 /* LaunchScreen.storyboard */,
 				16A9DF751E9F4B770048A1A7 /* Info.plist */,
 				16A9DF6D1E9F4B770048A1A7 /* PicturePerfect.xcdatamodeld */,
+				161261001EA3043300655537 /* CameraButton.swift */,
 			);
 			path = PicturePerfect;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			files = (
 				16A9DF691E9F4B770048A1A7 /* ViewController.swift in Sources */,
 				16A9DF6F1E9F4B770048A1A7 /* PicturePerfect.xcdatamodeld in Sources */,
+				161261011EA3043300655537 /* CameraButton.swift in Sources */,
 				16A9DF671E9F4B770048A1A7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

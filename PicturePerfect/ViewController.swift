@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import GoogleMobileVision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
@@ -95,6 +94,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             for f in features {
                 if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
                     // Good picture!
+                    print("Good picture!")
                 }
             }
             
@@ -137,10 +137,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     func setupVideoProcessing() {
-        //        NSDictionary *rgbOutputSettings = @{
-        //            (__bridge NSString*)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA)
-        //        };
-        //        [self.videoDataOutput setVideoSettings:rgbOutputSettings];
         self.videoDataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString): NSNumber(value:kCVPixelFormatType_32BGRA)]
         self.videoDataOutput.alwaysDiscardsLateVideoFrames = true
         if(self.captureSession.canAddOutput(self.videoDataOutput)) {
@@ -153,13 +149,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func setupCameraPreview() {
-        //        self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
-        //        [self.previewLayer setBackgroundColor:[[UIColor whiteColor] CGColor]];
-        //        [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
-        //        CALayer *rootLayer = [self.placeHolder layer];
-        //        [rootLayer setMasksToBounds:YES];
-        //        [self.previewLayer setFrame:[rootLayer bounds]];
-        //        [rootLayer addSublayer:self.previewLayer];
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
         self.previewLayer?.frame = view.layer.frame
         self.previewHolder.layer.masksToBounds = true

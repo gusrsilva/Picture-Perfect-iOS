@@ -20,6 +20,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var cameraPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.front // TODO: Update when switching is added
     var deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait   // TODO: Allow rotation?
 
+    var detectionActive: Bool = false
     
     // The captured image
     var selectedImage = UIImage()
@@ -77,6 +78,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        if(!detectionActive) {
+            return
+        }
         if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
             let ciimage = CIImage(cvImageBuffer: imageBuffer)
             let orientation = getCIDetectorImageOrientation(from: self.deviceOrientation, self.cameraPosition)
@@ -84,6 +88,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             for f in features {
                 if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
                     // Good picture!
+                    detectionActive = false
                     print("Good picture!")
                 }
             }
@@ -199,6 +204,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
+        detectionActive = true
     }
     
     @IBAction func flipCameraButtonPressed(_ sender: UIButton) {

@@ -30,6 +30,9 @@ class ViewImageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func backPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "previewToCamera", sender: self)
+    }
 
     /*
     // MARK: - Navigation

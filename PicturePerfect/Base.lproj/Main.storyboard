@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -106,20 +107,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X0c-G1-BVn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X0c-G1-BVn" customClass="ShadowImageView" customModule="PicturePerfect" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNv-Uo-eGp">
+                                <rect key="frame" x="16" y="20" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ic_arrow_back_white_36pt">
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="backPressed:" destination="kgU-qj-aH4" eventType="touchUpInside" id="8Ym-82-bk3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHP-19-EEK" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
+                                <rect key="frame" x="112" y="577" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="ic_share_white"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-HI-lbc" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
+                                <rect key="frame" x="203" y="577" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="ic_file_download_white"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="X0c-G1-BVn" secondAttribute="trailing" id="aHF-Nj-jSW"/>
-                            <constraint firstItem="X0c-G1-BVn" firstAttribute="bottom" secondItem="GaI-PR-51T" secondAttribute="top" id="fkt-Ym-ool"/>
-                            <constraint firstItem="X0c-G1-BVn" firstAttribute="leading" secondItem="TRA-Pe-S11" secondAttribute="leading" id="tlZ-Wa-bAv"/>
-                            <constraint firstItem="X0c-G1-BVn" firstAttribute="top" secondItem="TRA-Pe-S11" secondAttribute="top" id="wTq-qS-3IH"/>
+                            <constraint firstItem="X0c-G1-BVn" firstAttribute="centerY" secondItem="TRA-Pe-S11" secondAttribute="centerY" constant="-0.5" id="6jW-NY-fxq"/>
+                            <constraint firstItem="X0c-G1-BVn" firstAttribute="centerX" secondItem="TRA-Pe-S11" secondAttribute="centerX" id="MNJ-5s-0Ul"/>
+                            <constraint firstItem="X0c-G1-BVn" firstAttribute="leading" secondItem="TRA-Pe-S11" secondAttribute="leadingMargin" constant="-16" id="XFc-6S-ppV"/>
+                            <constraint firstItem="GaI-PR-51T" firstAttribute="top" secondItem="X0c-G1-BVn" secondAttribute="bottom" constant="1" id="cLm-n2-F97"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="previewImageView" destination="X0c-G1-BVn" id="3oQ-Ar-0ut"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="previewToCamera" id="M6m-RA-SSX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xdb-2i-qDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -128,7 +152,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_arrow_back_white_36pt" width="36" height="36"/>
+        <image name="ic_file_download_white" width="24" height="24"/>
         <image name="ic_loop_white" width="24" height="24"/>
         <image name="ic_more_horiz_white" width="24" height="24"/>
+        <image name="ic_share_white" width="24" height="24"/>
     </resources>
 </document>

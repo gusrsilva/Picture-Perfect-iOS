@@ -72,7 +72,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             takenImage = UIImage(data: photoData!)!
             performSegue(withIdentifier: "cameraToPreview", sender: self)
-            print("Image taken!")
         } else {
             print("photoSampleBufferIsNull!")
         }
@@ -103,7 +102,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func takePhoto() {
         detectionActive = false
         photoOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
-        print("Good picture!")
     }
     
     func getCIDetectorImageOrientation(from deviceOrientation: UIDeviceOrientation, _ cameraPos: AVCaptureDevicePosition ) -> Int {

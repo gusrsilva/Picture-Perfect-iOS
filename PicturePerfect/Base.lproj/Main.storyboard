@@ -87,11 +87,44 @@
                     </view>
                     <connections>
                         <outlet property="previewHolder" destination="aAq-7n-Svt" id="do7-lr-deK"/>
+                        <segue destination="kgU-qj-aH4" kind="show" identifier="cameraToPreview" id="MMZ-EY-kf0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
+        </scene>
+        <!--View Image View Controller-->
+        <scene sceneID="QwP-52-U3p">
+            <objects>
+                <viewController id="kgU-qj-aH4" customClass="ViewImageViewController" customModule="PicturePerfect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gWZ-eF-6Ge"/>
+                        <viewControllerLayoutGuide type="bottom" id="GaI-PR-51T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TRA-Pe-S11">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X0c-G1-BVn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="X0c-G1-BVn" secondAttribute="trailing" id="aHF-Nj-jSW"/>
+                            <constraint firstItem="X0c-G1-BVn" firstAttribute="bottom" secondItem="GaI-PR-51T" secondAttribute="top" id="fkt-Ym-ool"/>
+                            <constraint firstItem="X0c-G1-BVn" firstAttribute="leading" secondItem="TRA-Pe-S11" secondAttribute="leading" id="tlZ-Wa-bAv"/>
+                            <constraint firstItem="X0c-G1-BVn" firstAttribute="top" secondItem="TRA-Pe-S11" secondAttribute="top" id="wTq-qS-3IH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="previewImageView" destination="X0c-G1-BVn" id="3oQ-Ar-0ut"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xdb-2i-qDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922.39999999999998" y="136.28185907046478"/>
         </scene>
     </scenes>
     <resources>

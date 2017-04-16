@@ -23,7 +23,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var detectionActive: Bool = false
     
     // The captured image
-    var selectedImage = UIImage()
+    var takenImage = UIImage()
     
     // manages real time capture activity from input devices to create output media (photo/video)
     let captureSession = AVCaptureSession()
@@ -70,8 +70,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         if let photoSampleBuffer = photoSampleBuffer {
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
-            selectedImage = UIImage(data: photoData!)!
-            //            toggleUI(isInPreviewMode: true)
+            takenImage = UIImage(data: photoData!)!
+            performSegue(withIdentifier: "cameraToPreview", sender: self)
             print("Image taken!")
         } else {
             print("photoSampleBufferIsNull!")
@@ -90,9 +90,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             for f in features {
                 if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
                     // Good picture!
-                    detectionActive = false
-                    photoOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
-                    print("Good picture!")
+                    takePhoto()
                 }
             }
             
@@ -100,6 +98,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("Error with buffer!")
         }
         
+    }
+    
+    func takePhoto() {
+        detectionActive = false
+        photoOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+        print("Good picture!")
     }
     
     func getCIDetectorImageOrientation(from deviceOrientation: UIDeviceOrientation, _ cameraPos: AVCaptureDevicePosition ) -> Int {
@@ -220,6 +224,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.cameraPosition = AVCaptureDevicePosition.front
         }
         updateCameraSelection()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ViewImageViewController {
+            destination.imageToPreview = takenImage
+        } else {
+            print("Error converting seque destination to ViewImageViewController")
+        }
     }
 }
 

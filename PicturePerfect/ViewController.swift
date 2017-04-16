@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate {
     
     let detector = CIDetector(ofType: CIDetectorTypeFace, context: CIContext(), options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
 
@@ -19,7 +19,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var cameraPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.front // TODO: Update when switching is added
     var deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait   // TODO: Allow rotation?
-
+    
     var detectionActive: Bool = false
     
     // The captured image
@@ -69,10 +69,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         if let photoSampleBuffer = photoSampleBuffer {
-            // students need to add write this part
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             selectedImage = UIImage(data: photoData!)!
             //            toggleUI(isInPreviewMode: true)
+            print("Image taken!")
+        } else {
+            print("photoSampleBufferIsNull!")
         }
     }
     
@@ -89,6 +91,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                 if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
                     // Good picture!
                     detectionActive = false
+                    photoOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
                     print("Good picture!")
                 }
             }
@@ -172,6 +175,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                     self.captureSession.addInput(input)
                 }
             }
+        }
+        if(self.captureSession.canAddOutput(photoOutput)) {
+            self.captureSession.addOutput(photoOutput)
         }
         self.captureSession.commitConfiguration()
         

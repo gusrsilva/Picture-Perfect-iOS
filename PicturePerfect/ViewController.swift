@@ -17,8 +17,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var videoDataOutputQueue: DispatchQueue?
     var imageSet: Bool = false
     
-    let devicePosition: AVCaptureDevicePosition = AVCaptureDevicePosition.front // TODO: Update when switching is added
-    let deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait   // TODO: Allow rotation?
+    var cameraPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.front // TODO: Update when switching is added
+    var deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait   // TODO: Allow rotation?
 
     
     // The captured image
@@ -37,7 +37,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     let photoOutput = AVCapturePhotoOutput()
     
     @IBOutlet weak var previewHolder: UIView!
-    @IBOutlet weak var cameraButton: CameraButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +79,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
             let ciimage = CIImage(cvImageBuffer: imageBuffer)
-            let orientation = getCIDetectorImageOrientation(from: self.deviceOrientation, self.devicePosition)
+            let orientation = getCIDetectorImageOrientation(from: self.deviceOrientation, self.cameraPosition)
             let features = detector.features(in: ciimage, options: [CIDetectorEyeBlink: true, CIDetectorSmile: true, CIDetectorImageOrientation: orientation]) as! [CIFaceFeature]
             for f in features {
                 if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
@@ -157,8 +156,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                 captureSession.removeInput(input)
             }
         }
-        let desiredPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.front // TODO: Make dynamic
-        if let input = getCamera(forPositon: desiredPosition) {
+        if let input = getCamera(forPositon: cameraPosition) {
             // Succeeded, set input and update connection states
             self.captureSession.addInput(input)
             
@@ -197,7 +195,19 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         return nil
     }
     
+    @IBAction func moreOptionsPressed(_ sender: UIButton) {
+    }
     
+    @IBAction func cameraButtonPressed(_ sender: UIButton) {
+    }
     
+    @IBAction func flipCameraButtonPressed(_ sender: UIButton) {
+        if(self.cameraPosition == AVCaptureDevicePosition.front) {
+            self.cameraPosition = AVCaptureDevicePosition.back
+        } else {
+            self.cameraPosition = AVCaptureDevicePosition.front
+        }
+        updateCameraSelection()
+    }
 }
 

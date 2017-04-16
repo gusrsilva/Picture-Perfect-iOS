@@ -38,10 +38,13 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5DT-Mr-Jjw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLi-oJ-lNC" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
                                 <rect key="frame" x="267" y="562" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.0" green="0.93367225789999997" blue="0.56963433159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VLi-oJ-lNC" secondAttribute="height" multiplier="1:1" id="mdC-Ux-yi6"/>
                                     <constraint firstAttribute="height" constant="60" id="oqP-PB-yQ8"/>
@@ -49,10 +52,13 @@
                                 <state key="normal" image="ic_loop_white">
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="flipCameraButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mXJ-Gc-8RI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVZ-Y1-hW9" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
                                 <rect key="frame" x="47" y="562" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.0" green="0.93367225789999997" blue="0.56963433159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BVZ-Y1-hW9" secondAttribute="height" multiplier="1:1" id="eub-oQ-Ydi"/>
                                     <constraint firstAttribute="height" constant="60" id="s2d-ao-h3x"/>
@@ -60,6 +66,9 @@
                                 <state key="normal" image="ic_more_horiz_white">
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="moreOptionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KDK-DU-HaM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,7 +86,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cameraButton" destination="Lik-e0-Sqe" id="IVU-dZ-3Wp"/>
                         <outlet property="previewHolder" destination="aAq-7n-Svt" id="do7-lr-deK"/>
                     </connections>
                 </viewController>

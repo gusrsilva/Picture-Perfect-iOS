@@ -137,6 +137,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_share_white"/>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="kgU-qj-aH4" eventType="touchUpInside" id="Rop-NR-tz5"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-HI-lbc" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
                                 <rect key="frame" x="203" y="561" width="60" height="60"/>

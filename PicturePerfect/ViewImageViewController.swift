@@ -38,23 +38,24 @@ class ViewImageViewController: UIViewController {
                         button.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         },
                        completion: { _ in
-                        UIView.animate(withDuration: 0.1) {
+                        UIView.animate(withDuration: 0.1, animations: {
                             button.transform = CGAffineTransform.identity
+                        }, completion: { _ in
                             if let onComplete = onComplete {
                                 onComplete()
                             }
-                        }
+                        })
                         
         })
     }
     
     func showSavedBanner() {
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 0.3,
                        animations: {
                         self.savedBanner.frame.origin.y = 0
         },
                        completion: { _ in
-                        UIView.animate(withDuration: 0.5, delay: 2.0, options: [], animations: {
+                        UIView.animate(withDuration: 0.3, delay: 1.0, options: [], animations: {
                             self.savedBanner.frame.origin.y = -80
                         }, completion: nil)
                         
@@ -77,11 +78,23 @@ class ViewImageViewController: UIViewController {
     }
 
     @IBAction func saveToCameraRoll(_ sender: UIButton) {
-        animatePress(forButton: sender)
-        if let image = self.imageToPreview {
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveAttemptCompleted(_:didFinishSavingWithError:contextInfo:)), nil)
-        } else {
-            print("Can't save to camera roll image is nil!")
+        animatePress(forButton: sender) { _ in
+            if let image = self.imageToPreview {
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveAttemptCompleted(_:didFinishSavingWithError:contextInfo:)), nil)
+            } else {
+                print("Can't save to camera roll image is nil!")
+            }
+        }
+    }
+    
+    @IBAction func shareButtonPressed(_ sender: UIButton) {
+        animatePress(forButton: sender) { _ in
+            if let image = self.imageToPreview {
+                let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                // present the view controller
+                self.present(activityViewController, animated: true, completion: nil)
+            }
         }
     }
 }

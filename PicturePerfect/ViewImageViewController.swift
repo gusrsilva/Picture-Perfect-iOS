@@ -10,6 +10,7 @@ import UIKit
 
 class ViewImageViewController: UIViewController {
 
+    @IBOutlet weak var savedBanner: UILabel!
     @IBOutlet weak var previewImageView: UIImageView!
     
     var imageToPreview: UIImage?
@@ -47,6 +48,19 @@ class ViewImageViewController: UIViewController {
         })
     }
     
+    func showSavedBanner() {
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.savedBanner.frame.origin.y = 0
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.5, delay: 2.0, options: [], animations: {
+                            self.savedBanner.frame.origin.y = -80
+                        }, completion: nil)
+                        
+        })
+    }
+    
     @IBAction func backPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "previewToCamera", sender: self)
     }
@@ -54,7 +68,8 @@ class ViewImageViewController: UIViewController {
     @IBAction func saveToCameraRoll(_ sender: UIButton) {
         animatePress(forButton: sender) { _ in
             if let image = self.imageToPreview {
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                self.showSavedBanner()
+//            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             } else {
                print("Can't save to camera roll image is nil!")
             }

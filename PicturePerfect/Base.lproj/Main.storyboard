@@ -115,7 +115,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saved!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEV-X6-hI5">
-                                <rect key="frame" x="0.0" y="-1" width="375" height="79"/>
+                                <rect key="frame" x="0.0" y="-80" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.93367225789999997" blue="0.56963433159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -158,6 +158,7 @@
                     </view>
                     <connections>
                         <outlet property="previewImageView" destination="X0c-G1-BVn" id="3oQ-Ar-0ut"/>
+                        <outlet property="savedBanner" destination="mEV-X6-hI5" id="pyA-8J-SIr"/>
                         <segue destination="BYZ-38-t0r" kind="showDetail" identifier="previewToCamera" animates="NO" id="M6m-RA-SSX"/>
                     </connections>
                 </viewController>

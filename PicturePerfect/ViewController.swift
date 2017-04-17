@@ -39,6 +39,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBOutlet weak var previewHolder: UIView!
     
+    @IBOutlet weak var cameraButton: CameraButton!
+    @IBOutlet weak var moreOptionsButton: UIButton!
+    @IBOutlet weak var flipCameraButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.videoDataOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
@@ -230,6 +235,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                        animations: {
 //                        self.previewHolder.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                         self.previewHolder.alpha = 0.5
+                        self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y + 100
+                        self.flipCameraButton.frame.origin.x = self.flipCameraButton.frame.origin.x - 70
+                        self.moreOptionsButton.frame.origin.x = self.moreOptionsButton.frame.origin.x + 70
         },
                        completion: { _ in
                         UIView.animate(withDuration: 0.2) {

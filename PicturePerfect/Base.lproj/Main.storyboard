@@ -88,6 +88,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="Lik-e0-Sqe" id="bkJ-q7-hse"/>
+                        <outlet property="flipCameraButton" destination="VLi-oJ-lNC" id="9aG-hu-7ZX"/>
+                        <outlet property="moreOptionsButton" destination="BVZ-Y1-hW9" id="fk5-nU-zgl"/>
                         <outlet property="previewHolder" destination="aAq-7n-Svt" id="do7-lr-deK"/>
                         <segue destination="kgU-qj-aH4" kind="show" identifier="cameraToPreview" animates="NO" id="MMZ-EY-kf0"/>
                     </connections>
@@ -122,13 +125,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHP-19-EEK" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
-                                <rect key="frame" x="112" y="577" width="60" height="60"/>
+                                <rect key="frame" x="112" y="561" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_share_white"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-HI-lbc" customClass="CameraButton" customModule="PicturePerfect" customModuleProvider="target">
-                                <rect key="frame" x="203" y="577" width="60" height="60"/>
+                                <rect key="frame" x="203" y="561" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_file_download_white"/>

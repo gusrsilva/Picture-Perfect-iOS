@@ -61,18 +61,27 @@ class ViewImageViewController: UIViewController {
         })
     }
     
+    func saveAttemptCompleted(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            showSavedBanner()
+        }
+    }
+    
     @IBAction func backPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "previewToCamera", sender: self)
     }
 
     @IBAction func saveToCameraRoll(_ sender: UIButton) {
-        animatePress(forButton: sender) { _ in
-            if let image = self.imageToPreview {
-                self.showSavedBanner()
-//            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            } else {
-               print("Can't save to camera roll image is nil!")
-            }
+        animatePress(forButton: sender)
+        if let image = self.imageToPreview {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveAttemptCompleted(_:didFinishSavingWithError:contextInfo:)), nil)
+        } else {
+            print("Can't save to camera roll image is nil!")
         }
     }
 }

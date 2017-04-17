@@ -71,7 +71,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         if let photoSampleBuffer = photoSampleBuffer {
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             takenImage = UIImage(data: photoData!)!
-            performSegue(withIdentifier: "cameraToPreview", sender: self)
+            animatePhotoTaken(onComplete: {self.performSegue(withIdentifier: "cameraToPreview", sender: self)})
+//            performSegue(withIdentifier: "cameraToPreview", sender: self)
         } else {
             print("photoSampleBufferIsNull!")
         }
@@ -224,12 +225,30 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         })
     }
     
+    func animatePhotoTaken(onComplete: ((Void) -> Swift.Void)? = nil) {
+        UIView.animate(withDuration: 0.2,
+                       animations: {
+//                        self.previewHolder.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                        self.previewHolder.alpha = 0.5
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.2) {
+//                            self.previewHolder.transform = CGAffineTransform.identity
+                            self.previewHolder.alpha = 1.0
+                            if let onComplete = onComplete {
+                                onComplete()
+                            }
+                        }
+                        
+        })
+    }
+    
     @IBAction func moreOptionsPressed(_ sender: UIButton) {
         animatePress(forButton: sender)
     }
     
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
-        detectionActive = true
+        detectionActive = !detectionActive
         animatePress(forButton: sender)
     }
     

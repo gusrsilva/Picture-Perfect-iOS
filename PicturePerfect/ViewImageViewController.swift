@@ -17,9 +17,10 @@ class ViewImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let image = imageToPreview {
             previewImageView.image = image
+            previewImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
         } else {
             print("image is nil!")
         }

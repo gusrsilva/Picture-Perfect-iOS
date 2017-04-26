@@ -39,7 +39,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBOutlet weak var previewHolder: UIView!
     
-    @IBOutlet weak var cameraButton: MaterialButton!
+    @IBOutlet weak var cameraButton: CameraButton!
     @IBOutlet weak var moreOptionsButton: MaterialButton!
     @IBOutlet weak var flipCameraButton: MaterialButton!
     
@@ -94,15 +94,35 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             let features = detector.features(in: ciimage, options: [CIDetectorEyeBlink: true, CIDetectorSmile: true, CIDetectorImageOrientation: orientation]) as! [CIFaceFeature]
             for f in features {
                 if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
-                    // Good picture!
                     takePhoto()
+                } else {
+                    updateCameraButtonHint(face: f)
                 }
+            }
+            if(features.count == 0) {
+                updateCameraButtonHint(face: nil)
             }
             
         } else {
             print("Error with buffer!")
         }
         
+    }
+    
+    func updateCameraButtonHint(face: CIFaceFeature? = nil) {
+        var newLabel = "👻"
+        if let f = face {
+            if(f.leftEyeClosed || f.rightEyeClosed) {
+                newLabel = "😵"
+            } else if(f.hasSmile && (f.leftEyeClosed || f.rightEyeClosed)) {
+                newLabel = "😜"
+            } else if(!f.hasSmile) {
+                newLabel = "☹️"
+            } else {
+                newLabel = "😁"
+            }
+        }
+        cameraButton.updateLable(to: newLabel)
     }
     
     func takePhoto() {

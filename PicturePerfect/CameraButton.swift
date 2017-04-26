@@ -11,6 +11,8 @@ import UIKit
 class CameraButton: MaterialButton {
     
     var pulseLayer: CAShapeLayer!
+    var lastUpdated = Date.init()
+    let LABEL_CHANGE_THRESHOLD: Double = 1.0
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -28,9 +30,9 @@ class CameraButton: MaterialButton {
         shrinkAndGrow(onComplete: onComplete)
         pulse(detectionActive: detectionActive)
         if(detectionActive) {
-            updateLable(to: "😁")
+            updateLable(to: "😁", overrideTimeCheck: true)
         } else {
-            updateLable(to: "👌")
+            updateLable(to: "👌", overrideTimeCheck: true)
         }
     }
     
@@ -70,10 +72,20 @@ class CameraButton: MaterialButton {
         }
     }
     
-    func updateLable(to newLabel: String) {
-        UIView.transition(with: self.titleLabel!, duration: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.setTitle(newLabel, for: .normal)
-        }, completion: nil)
+    func updateLable(to newLabel: String, overrideTimeCheck: Bool = false) {
+        let diff: Double = -lastUpdated.timeIntervalSinceNow
+        if(overrideTimeCheck || diff > LABEL_CHANGE_THRESHOLD) {
+            if self.title(for: .normal) == newLabel {
+                return
+            }
+            lastUpdated = Date.init()
+            DispatchQueue.main.async {
+                UIView.transition(with: self.titleLabel!, duration: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.setTitle(newLabel, for: .normal)
+                }, completion: nil)
+            }
+        }
+        
     }
 
 }

@@ -91,7 +91,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cameraButton" destination="Lik-e0-Sqe" id="bkJ-q7-hse"/>
+                        <outlet property="cameraButton" destination="Lik-e0-Sqe" id="QSi-Ah-hNz"/>
                         <outlet property="flipCameraButton" destination="VLi-oJ-lNC" id="9aG-hu-7ZX"/>
                         <outlet property="moreOptionsButton" destination="BVZ-Y1-hW9" id="fk5-nU-zgl"/>
                         <outlet property="previewHolder" destination="aAq-7n-Svt" id="do7-lr-deK"/>

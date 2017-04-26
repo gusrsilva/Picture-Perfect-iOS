@@ -40,23 +40,20 @@ class MaterialButton: UIButton {
         }
     }
     
-    func animatePress(keepResult keep: Bool = false ,onComplete: ((Void) -> Swift.Void)? = nil) {
-        ripple(keep)
+    func animatePress(onComplete: ((Void) -> Swift.Void)? = nil) {
+        ripple()
         shrinkAndGrow(onComplete: onComplete)
     }
     
-    func ripple(_ keep: Bool) {
+    func ripple() {
         // Create a blank animation using the keyPath "cornerRadius", the property we want to animate
         let animation = CABasicAnimation(keyPath: "transform")
 
-        animation.fromValue = CATransform3DMakeScale(0.5, 0.5, 1.0)
+        animation.fromValue = CATransform3DMakeScale(0.2, 0.2, 1.0)
         animation.toValue = CATransform3DMakeScale(1.0, 1.0, 1.0)
         animation.repeatCount = 1
-        animation.duration = 0.2
+        animation.duration = 0.3
         
-        if(keep) {
-            rippleLayer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
-        }
         rippleLayer.add(animation, forKey: "transform")
     }
     

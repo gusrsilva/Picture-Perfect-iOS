@@ -239,9 +239,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         sender.animatePress()
     }
     
-    @IBAction func cameraButtonPressed(_ sender: MaterialButton) {
-//        detectionActive = !detectionActive
-        sender.animatePress()
+    @IBAction func cameraButtonPressed(_ sender: CameraButton) {
+        detectionActive = !detectionActive
+        sender.animatePress(detectionActive: detectionActive)
     }
     
     @IBAction func flipCameraButtonPressed(_ sender: MaterialButton) {

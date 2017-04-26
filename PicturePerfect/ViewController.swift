@@ -39,9 +39,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBOutlet weak var previewHolder: UIView!
     
-    @IBOutlet weak var cameraButton: CameraButton!
-    @IBOutlet weak var moreOptionsButton: UIButton!
-    @IBOutlet weak var flipCameraButton: UIButton!
+    @IBOutlet weak var cameraButton: MaterialButton!
+    @IBOutlet weak var moreOptionsButton: MaterialButton!
+    @IBOutlet weak var flipCameraButton: MaterialButton!
     
     
     override func viewDidLoad() {
@@ -214,22 +214,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         return nil
     }
     
-    func animatePress(forButton button: UIButton, onComplete: ((Void) -> Swift.Void)? = nil) {
-        UIView.animate(withDuration: 0.1,
-                       animations: {
-                        button.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        },
-                       completion: { _ in
-                        UIView.animate(withDuration: 0.1) {
-                            button.transform = CGAffineTransform.identity
-                            if let onComplete = onComplete {
-                                onComplete()
-                            }
-                        }
-                        
-        })
-    }
-    
     func animatePhotoTaken(onComplete: ((Void) -> Swift.Void)? = nil) {
         UIView.animate(withDuration: 0.2,
                        animations: {
@@ -251,22 +235,22 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         })
     }
     
-    @IBAction func moreOptionsPressed(_ sender: UIButton) {
-        animatePress(forButton: sender)
+    @IBAction func moreOptionsPressed(_ sender: MaterialButton) {
+        sender.animatePress()
     }
     
-    @IBAction func cameraButtonPressed(_ sender: UIButton) {
-        detectionActive = !detectionActive
-        animatePress(forButton: sender)
+    @IBAction func cameraButtonPressed(_ sender: MaterialButton) {
+//        detectionActive = !detectionActive
+        sender.animatePress()
     }
     
-    @IBAction func flipCameraButtonPressed(_ sender: UIButton) {
+    @IBAction func flipCameraButtonPressed(_ sender: MaterialButton) {
         if(self.cameraPosition == AVCaptureDevicePosition.front) {
             self.cameraPosition = AVCaptureDevicePosition.back
         } else {
             self.cameraPosition = AVCaptureDevicePosition.front
         }
-        animatePress(forButton: sender, onComplete: {self.updateCameraSelection()})
+        sender.animatePress(onComplete: {self.updateCameraSelection()})
 
     }
     

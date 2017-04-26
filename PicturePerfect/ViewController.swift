@@ -58,17 +58,21 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.captureSession.startRunning()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        slideButtonsIn()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         self.captureSession.stopRunning()
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     
@@ -76,8 +80,10 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         if let photoSampleBuffer = photoSampleBuffer {
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             takenImage = UIImage(data: photoData!)!
-            animatePhotoTaken(onComplete: {self.performSegue(withIdentifier: "cameraToPreview", sender: self)})
-//            performSegue(withIdentifier: "cameraToPreview", sender: self)
+//            animatePhotoTaken(onComplete: {self.performSegue(withIdentifier: "cameraToPreview", sender: self)})
+            self.slideButtonsOut(onComplete: { _ in
+                self.performSegue(withIdentifier: "cameraToPreview", sender: self)
+            })
         } else {
             print("photoSampleBufferIsNull!")
         }
@@ -253,6 +259,31 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                         }
                         
         })
+    }
+    
+    func slideButtonsIn() {
+        self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y + 200
+        self.flipCameraButton.frame.origin.y = self.flipCameraButton.frame.origin.y + 800
+        self.moreOptionsButton.frame.origin.y = self.moreOptionsButton.frame.origin.y + 1600
+        
+        UIView.animate(withDuration: 0.4, delay: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y - 200
+            self.flipCameraButton.frame.origin.y = self.flipCameraButton.frame.origin.y - 800
+            self.moreOptionsButton.frame.origin.y = self.moreOptionsButton.frame.origin.y - 1600
+        }) { _ in
+        }
+    }
+    
+    func slideButtonsOut(onComplete: ((Void) -> Swift.Void)?) {
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y + 200
+            self.flipCameraButton.frame.origin.y = self.flipCameraButton.frame.origin.y + 800
+            self.moreOptionsButton.frame.origin.y = self.moreOptionsButton.frame.origin.y + 1600
+        }) { _ in
+            if let onComplete = onComplete {
+                onComplete()
+            }
+        }
     }
     
     @IBAction func moreOptionsPressed(_ sender: MaterialButton) {

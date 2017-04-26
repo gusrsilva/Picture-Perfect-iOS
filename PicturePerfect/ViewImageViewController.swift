@@ -14,6 +14,7 @@ class ViewImageViewController: UIViewController {
     @IBOutlet weak var previewImageView: UIImageView!
     
     @IBOutlet weak var shareButton: MaterialButton!
+    @IBOutlet weak var saveButton: MaterialButton!
     
     var imageToPreview: UIImage?
     
@@ -32,10 +33,35 @@ class ViewImageViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        slideButtonsIn()
+    }
     
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func slideButtonsIn() {
+        self.shareButton.frame.origin.y = self.shareButton.frame.origin.y + 200
+        self.saveButton.frame.origin.y = self.saveButton.frame.origin.y + 800
+        
+        UIView.animate(withDuration: 0.4, delay: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.shareButton.frame.origin.y = self.shareButton.frame.origin.y - 200
+            self.saveButton.frame.origin.y = self.saveButton.frame.origin.y - 800
+        }) { _ in
+        }
+    }
+    
+    func slideButtonsOut(onComplete: ((Void) -> Swift.Void)?) {
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.shareButton.frame.origin.y = self.shareButton.frame.origin.y + 200
+            self.saveButton.frame.origin.y = self.saveButton.frame.origin.y + 800
+        }) { _ in
+            if let onComplete = onComplete {
+                onComplete()
+            }
+        }
     }
     
     
@@ -64,7 +90,9 @@ class ViewImageViewController: UIViewController {
     }
     
     @IBAction func backPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "previewToCamera", sender: self)
+        slideButtonsOut { _ in
+            self.performSegue(withIdentifier: "previewToCamera", sender: self)
+        }
     }
 
     @IBAction func saveToCameraRoll(_ sender: MaterialButton) {

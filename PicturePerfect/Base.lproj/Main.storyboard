@@ -95,7 +95,7 @@
                         <outlet property="flipCameraButton" destination="VLi-oJ-lNC" id="9aG-hu-7ZX"/>
                         <outlet property="moreOptionsButton" destination="BVZ-Y1-hW9" id="fk5-nU-zgl"/>
                         <outlet property="previewHolder" destination="aAq-7n-Svt" id="do7-lr-deK"/>
-                        <segue destination="kgU-qj-aH4" kind="show" identifier="cameraToPreview" customClass="FadeSegue" customModule="PicturePerfect" customModuleProvider="target" animates="NO" id="MMZ-EY-kf0"/>
+                        <segue destination="kgU-qj-aH4" kind="show" identifier="cameraToPreview" animates="NO" id="MMZ-EY-kf0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -166,6 +166,7 @@
                     </view>
                     <connections>
                         <outlet property="previewImageView" destination="X0c-G1-BVn" id="3oQ-Ar-0ut"/>
+                        <outlet property="saveButton" destination="Pqd-HI-lbc" id="QWD-a0-Gqy"/>
                         <outlet property="savedBanner" destination="mEV-X6-hI5" id="pyA-8J-SIr"/>
                         <outlet property="shareButton" destination="WHP-19-EEK" id="uoy-W0-PCR"/>
                         <segue destination="BYZ-38-t0r" kind="showDetail" identifier="previewToCamera" animates="NO" id="M6m-RA-SSX"/>

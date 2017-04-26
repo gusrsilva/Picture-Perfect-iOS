@@ -13,6 +13,8 @@ class ViewImageViewController: UIViewController {
     @IBOutlet weak var savedBanner: UILabel!
     @IBOutlet weak var previewImageView: UIImageView!
     
+    @IBOutlet weak var shareButton: MaterialButton!
+    
     var imageToPreview: UIImage?
     
     
@@ -21,33 +23,21 @@ class ViewImageViewController: UIViewController {
         
         if let image = imageToPreview {
             previewImageView.image = image
+            
+            // Flip horizontal to match preview
             previewImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
         } else {
             print("image is nil!")
         }
+        
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    func animatePress(forButton button: UIButton, onComplete: ((Void) -> Swift.Void)? = nil) {
-        UIView.animate(withDuration: 0.1,
-                       animations: {
-                        button.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        },
-                       completion: { _ in
-                        UIView.animate(withDuration: 0.1, animations: {
-                            button.transform = CGAffineTransform.identity
-                        }, completion: { _ in
-                            if let onComplete = onComplete {
-                                onComplete()
-                            }
-                        })
-                        
-        })
-    }
     
     func showSavedBanner() {
         UIView.animate(withDuration: 0.3,
@@ -77,8 +67,8 @@ class ViewImageViewController: UIViewController {
         performSegue(withIdentifier: "previewToCamera", sender: self)
     }
 
-    @IBAction func saveToCameraRoll(_ sender: UIButton) {
-        animatePress(forButton: sender) { _ in
+    @IBAction func saveToCameraRoll(_ sender: MaterialButton) {
+        sender.animatePress { _ in
             if let image = self.imageToPreview {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveAttemptCompleted(_:didFinishSavingWithError:contextInfo:)), nil)
             } else {
@@ -87,8 +77,8 @@ class ViewImageViewController: UIViewController {
         }
     }
     
-    @IBAction func shareButtonPressed(_ sender: UIButton) {
-        animatePress(forButton: sender) { _ in
+    @IBAction func shareButtonPressed(_ sender: MaterialButton) {
+        sender.animatePress { _ in
             if let image = self.imageToPreview {
                 let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
                 activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash

@@ -11,6 +11,7 @@
 		161261071EA34E7000655537 /* ViewImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161261061EA34E7000655537 /* ViewImageViewController.swift */; };
 		161261091EA352E800655537 /* ShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161261081EA352E800655537 /* ShadowImageView.swift */; };
 		1634B8771EB118F500FDC95E /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1634B8761EB118F500FDC95E /* CameraButton.swift */; };
+		1634B8791EB13DB300FDC95E /* FadeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1634B8781EB13DB300FDC95E /* FadeSegue.swift */; };
 		16A9DF671E9F4B770048A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9DF661E9F4B770048A1A7 /* AppDelegate.swift */; };
 		16A9DF691E9F4B770048A1A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9DF681E9F4B770048A1A7 /* ViewController.swift */; };
 		16A9DF6C1E9F4B770048A1A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A9DF6A1E9F4B770048A1A7 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		161261061EA34E7000655537 /* ViewImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewImageViewController.swift; sourceTree = "<group>"; };
 		161261081EA352E800655537 /* ShadowImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowImageView.swift; sourceTree = "<group>"; };
 		1634B8761EB118F500FDC95E /* CameraButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
+		1634B8781EB13DB300FDC95E /* FadeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeSegue.swift; sourceTree = "<group>"; };
 		16A9DF631E9F4B770048A1A7 /* PicturePerfect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicturePerfect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16A9DF661E9F4B770048A1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16A9DF681E9F4B770048A1A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				161261061EA34E7000655537 /* ViewImageViewController.swift */,
 				161261081EA352E800655537 /* ShadowImageView.swift */,
 				1634B8761EB118F500FDC95E /* CameraButton.swift */,
+				1634B8781EB13DB300FDC95E /* FadeSegue.swift */,
 			);
 			path = PicturePerfect;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				161261091EA352E800655537 /* ShadowImageView.swift in Sources */,
 				16A9DF691E9F4B770048A1A7 /* ViewController.swift in Sources */,
 				16A9DF6F1E9F4B770048A1A7 /* PicturePerfect.xcdatamodeld in Sources */,
+				1634B8791EB13DB300FDC95E /* FadeSegue.swift in Sources */,
 				161261071EA34E7000655537 /* ViewImageViewController.swift in Sources */,
 				161261011EA3043300655537 /* MaterialButton.swift in Sources */,
 				16A9DF671E9F4B770048A1A7 /* AppDelegate.swift in Sources */,

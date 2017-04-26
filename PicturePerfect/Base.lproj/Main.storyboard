@@ -95,7 +95,7 @@
                         <outlet property="flipCameraButton" destination="VLi-oJ-lNC" id="9aG-hu-7ZX"/>
                         <outlet property="moreOptionsButton" destination="BVZ-Y1-hW9" id="fk5-nU-zgl"/>
                         <outlet property="previewHolder" destination="aAq-7n-Svt" id="do7-lr-deK"/>
-                        <segue destination="kgU-qj-aH4" kind="show" identifier="cameraToPreview" animates="NO" id="MMZ-EY-kf0"/>
+                        <segue destination="kgU-qj-aH4" kind="show" identifier="cameraToPreview" customClass="FadeSegue" customModule="PicturePerfect" customModuleProvider="target" animates="NO" id="MMZ-EY-kf0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -139,7 +139,8 @@
                                 <rect key="frame" x="112" y="561" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="ic_open_in_browser_36pt"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680650684932" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="ic_share"/>
                                 <connections>
                                     <action selector="shareButtonPressed:" destination="kgU-qj-aH4" eventType="touchUpInside" id="Rop-NR-tz5"/>
                                 </connections>
@@ -148,7 +149,8 @@
                                 <rect key="frame" x="203" y="561" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="ic_vertical_align_bottom_36pt"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680650684932" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="ic_vertical_align_bottom"/>
                                 <connections>
                                     <action selector="saveToCameraRoll:" destination="kgU-qj-aH4" eventType="touchUpInside" id="nSx-Kn-5CG"/>
                                 </connections>
@@ -165,6 +167,7 @@
                     <connections>
                         <outlet property="previewImageView" destination="X0c-G1-BVn" id="3oQ-Ar-0ut"/>
                         <outlet property="savedBanner" destination="mEV-X6-hI5" id="pyA-8J-SIr"/>
+                        <outlet property="shareButton" destination="WHP-19-EEK" id="uoy-W0-PCR"/>
                         <segue destination="BYZ-38-t0r" kind="showDetail" identifier="previewToCamera" animates="NO" id="M6m-RA-SSX"/>
                     </connections>
                 </viewController>
@@ -177,7 +180,7 @@
         <image name="ic_arrow_back_white_36pt" width="36" height="36"/>
         <image name="ic_loop" width="24" height="24"/>
         <image name="ic_more_horiz" width="24" height="24"/>
-        <image name="ic_open_in_browser_36pt" width="36" height="36"/>
-        <image name="ic_vertical_align_bottom_36pt" width="36" height="36"/>
+        <image name="ic_share" width="24" height="24"/>
+        <image name="ic_vertical_align_bottom" width="24" height="24"/>
     </resources>
 </document>

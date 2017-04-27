@@ -361,36 +361,50 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHP-19-EEK" customClass="MaterialButton" customModule="PicturePerfect" customModuleProvider="target">
-                                <rect key="frame" x="112" y="561" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680650684932" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="ic_share"/>
-                                <connections>
-                                    <action selector="shareButtonPressed:" destination="kgU-qj-aH4" eventType="touchUpInside" id="Rop-NR-tz5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-HI-lbc" customClass="MaterialButton" customModule="PicturePerfect" customModuleProvider="target">
-                                <rect key="frame" x="203" y="561" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680650684932" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="ic_vertical_align_bottom"/>
-                                <connections>
-                                    <action selector="saveToCameraRoll:" destination="kgU-qj-aH4" eventType="touchUpInside" id="nSx-Kn-5CG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNv-Uo-eGp">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNv-Uo-eGp" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
                                 <rect key="frame" x="8" y="20" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="ic_arrow_back_white">
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
+                                <color key="tintColor" white="1" alpha="0.14966823630136986" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="ic_arrow_back_white"/>
                                 <connections>
                                     <action selector="backPressed:" destination="kgU-qj-aH4" eventType="touchUpInside" id="8Ym-82-bk3"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-5w-mhT">
+                                <rect key="frame" x="0.0" y="592" width="375" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHP-19-EEK" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
+                                        <rect key="frame" x="69" y="6" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680650684932" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="ic_share">
+                                            <color key="titleColor" red="0.1764705926" green="0.49803921579999999" blue="0.75686275960000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shareButtonPressed:" destination="kgU-qj-aH4" eventType="touchUpInside" id="Rop-NR-tz5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-HI-lbc" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
+                                        <rect key="frame" x="157" y="6" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680650684932" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="ic_vertical_align_bottom"/>
+                                        <connections>
+                                            <action selector="saveToCameraRoll:" destination="kgU-qj-aH4" eventType="touchUpInside" id="nSx-Kn-5CG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2kJ-L5-ZWL" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
+                                        <rect key="frame" x="240" y="6" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680649999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="ic_tune"/>
+                                    </button>
+                                </subviews>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -401,6 +415,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonsHolder" destination="ZZU-5w-mhT" id="6Bl-gm-zNV"/>
                         <outlet property="previewImageView" destination="X0c-G1-BVn" id="3oQ-Ar-0ut"/>
                         <outlet property="saveButton" destination="Pqd-HI-lbc" id="QWD-a0-Gqy"/>
                         <outlet property="savedBanner" destination="mEV-X6-hI5" id="pyA-8J-SIr"/>
@@ -436,6 +451,7 @@
         <image name="ic_loop" width="24" height="24"/>
         <image name="ic_more_horiz" width="24" height="24"/>
         <image name="ic_share" width="24" height="24"/>
+        <image name="ic_tune" width="24" height="24"/>
         <image name="ic_vertical_align_bottom" width="24" height="24"/>
     </resources>
 </document>

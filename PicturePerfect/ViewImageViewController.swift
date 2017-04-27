@@ -13,6 +13,7 @@ class ViewImageViewController: UIViewController {
     @IBOutlet weak var savedBanner: UILabel!
     @IBOutlet weak var previewImageView: UIImageView!
     
+    @IBOutlet weak var buttonsHolder: UIView!
     @IBOutlet weak var shareButton: MaterialButton!
     @IBOutlet weak var saveButton: MaterialButton!
     
@@ -46,7 +47,8 @@ class ViewImageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        slideButtonsIn()
+//        slideButtonsIn()  // TODO: Add back
+        addBlurEffect(to: buttonsHolder)
     }
     
 
@@ -101,7 +103,23 @@ class ViewImageViewController: UIViewController {
         }
     }
     
-    @IBAction func backPressed(_ sender: UIButton) {
+    func addBlurEffect(to view: UIView) {
+        let blurrEffect  = UIBlurEffect(style: .light)
+        let blurEffectView = UIVisualEffectView(effect: blurrEffect)
+        blurEffectView.frame = view.bounds
+        
+        
+        let vibrancyEffectView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: blurrEffect))
+        vibrancyEffectView.frame = view.bounds
+
+        
+        blurEffectView.addSubview(vibrancyEffectView)
+        view.addSubview(blurEffectView)
+        view.sendSubview(toBack: blurEffectView)
+    }
+    
+    @IBAction func backPressed(_ sender: MaterialButton) {
+        sender.animatePress()
         slideButtonsOut { _ in
             self.performSegue(withIdentifier: "previewToCamera", sender: self)
         }

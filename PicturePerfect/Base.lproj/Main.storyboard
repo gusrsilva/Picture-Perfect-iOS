@@ -402,6 +402,9 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680649999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="ic_tune"/>
+                                        <connections>
+                                            <action selector="editButtonPressed:" destination="kgU-qj-aH4" eventType="touchUpInside" id="idp-wG-uIo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </view>

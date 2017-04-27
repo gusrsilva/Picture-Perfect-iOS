@@ -19,10 +19,8 @@ class ViewImageViewController: UIViewController {
     
     var imageToPreview: UIImage?
     
-    var shareButtonShowingY: CGFloat = CGFloat()
-    var shareButtonHiddenY: CGFloat = CGFloat()
-    var saveButtonShowingY: CGFloat = CGFloat()
-    var saveButtonHiddenY: CGFloat = CGFloat()
+    var buttonsShowingY: CGFloat = CGFloat()
+    var buttonsHiddenY: CGFloat = CGFloat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,15 +37,12 @@ class ViewImageViewController: UIViewController {
     }
     
     func initButtonAnimationParams() {
-        shareButtonShowingY = self.shareButton.frame.origin.y
-        saveButtonShowingY = self.saveButton.frame.origin.y
-        
-        shareButtonHiddenY = shareButtonShowingY + 200
-        saveButtonHiddenY = saveButtonShowingY + 800
+        buttonsShowingY = self.buttonsHolder.frame.origin.y
+        buttonsHiddenY = buttonsShowingY + 300
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        slideButtonsIn()  // TODO: Add back
+        slideButtonsIn()  // TODO: Add back
         addBlurEffect(to: buttonsHolder)
     }
     
@@ -57,20 +52,17 @@ class ViewImageViewController: UIViewController {
     }
     
     func slideButtonsIn() {
-        self.shareButton.frame.origin.y = shareButtonHiddenY
-        self.saveButton.frame.origin.y = saveButtonHiddenY
+        self.buttonsHolder.frame.origin.y = buttonsHiddenY
         
         UIView.animate(withDuration: 0.4, delay: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.shareButton.frame.origin.y = self.shareButtonShowingY
-            self.saveButton.frame.origin.y = self.saveButtonShowingY
+            self.buttonsHolder.frame.origin.y = self.buttonsShowingY
         }) { _ in
         }
     }
     
     func slideButtonsOut(onComplete: ((Void) -> Swift.Void)?) {
         UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.shareButton.frame.origin.y = self.shareButtonHiddenY
-            self.saveButton.frame.origin.y = self.saveButtonHiddenY
+            self.buttonsHolder.frame.origin.y = self.buttonsHiddenY
         }) { _ in
             if let onComplete = onComplete {
                 onComplete()
@@ -144,5 +136,9 @@ class ViewImageViewController: UIViewController {
                 self.present(activityViewController, animated: true, completion: nil)
             }
         }
+    }
+    
+    @IBAction func editButtonPressed(_ sender: FlatMaterialButton) {
+        sender.animatePress()
     }
 }

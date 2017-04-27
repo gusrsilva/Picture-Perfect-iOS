@@ -230,9 +230,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func setupCameraPreview() {
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
         self.previewLayer?.frame = view.layer.frame
+        self.previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         self.previewHolder.layer.masksToBounds = true
         self.previewHolder.layer.addSublayer(self.previewLayer!)
-        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
+        self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto
+//        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
         self.captureSession.startRunning()
     }
     

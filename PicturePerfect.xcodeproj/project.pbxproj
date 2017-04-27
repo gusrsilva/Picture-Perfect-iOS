@@ -20,6 +20,7 @@
 		16A9DF711E9F4B770048A1A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16A9DF701E9F4B770048A1A7 /* Assets.xcassets */; };
 		16A9DF741E9F4B770048A1A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A9DF721E9F4B770048A1A7 /* LaunchScreen.storyboard */; };
 		16FE937E1EB1A5C700632ADE /* FlatMaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE937D1EB1A5C700632ADE /* FlatMaterialButton.swift */; };
+		16FE93801EB1B76800632ADE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE937F1EB1B76800632ADE /* Constants.swift */; };
 		2522EE54BC8EAED79F0094CB /* Pods_PicturePerfect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C69FE66E3ABB6A0A23112A1 /* Pods_PicturePerfect.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		16A9DF731E9F4B770048A1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16A9DF751E9F4B770048A1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16FE937D1EB1A5C700632ADE /* FlatMaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatMaterialButton.swift; sourceTree = "<group>"; };
+		16FE937F1EB1B76800632ADE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6C69FE66E3ABB6A0A23112A1 /* Pods_PicturePerfect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PicturePerfect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F3E68F07A56730F65CA738 /* Pods-PicturePerfect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicturePerfect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PicturePerfect/Pods-PicturePerfect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				1634B8781EB13DB300FDC95E /* FadeSegue.swift */,
 				1634B87A1EB1859E00FDC95E /* SettingsViewController.swift */,
 				16FE937D1EB1A5C700632ADE /* FlatMaterialButton.swift */,
+				16FE937F1EB1B76800632ADE /* Constants.swift */,
 			);
 			path = PicturePerfect;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				161261091EA352E800655537 /* ShadowImageView.swift in Sources */,
+				16FE93801EB1B76800632ADE /* Constants.swift in Sources */,
 				16FE937E1EB1A5C700632ADE /* FlatMaterialButton.swift in Sources */,
 				16A9DF691E9F4B770048A1A7 /* ViewController.swift in Sources */,
 				16A9DF6F1E9F4B770048A1A7 /* PicturePerfect.xcdatamodeld in Sources */,

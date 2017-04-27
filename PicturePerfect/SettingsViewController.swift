@@ -9,6 +9,9 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
+    
+    let userDefaults = UserDefaults.standard
+
 
     @IBOutlet weak var autoSavePhotosSwitch: UISwitch!
     @IBOutlet weak var sensitivitySlider: UISlider!
@@ -18,11 +21,21 @@ class SettingsViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
 
-        // TODO: Load settings
+        // Load settings
+        let autoSave:Bool = userDefaults.bool(forKey: AUTO_SAVE_KEY)
+        let sensitivity: Float = userDefaults.float(forKey: SENSITIVITY_KEY)
+
+        autoSavePhotosSwitch.setOn(autoSave, animated: false)
+        sensitivitySlider.setValue(sensitivity, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        // TODO: Save settings
+        // Save settings
+        let autoSave: Bool = autoSavePhotosSwitch.isOn
+        let sensitivity: Float = sensitivitySlider.value
+        
+        userDefaults.set(autoSave, forKey: AUTO_SAVE_KEY)
+        userDefaults.set(sensitivity, forKey: SENSITIVITY_KEY)
     }
 
     

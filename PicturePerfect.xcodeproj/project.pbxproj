@@ -10,6 +10,7 @@
 		161261011EA3043300655537 /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161261001EA3043300655537 /* MaterialButton.swift */; };
 		161261071EA34E7000655537 /* ViewImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161261061EA34E7000655537 /* ViewImageViewController.swift */; };
 		161261091EA352E800655537 /* ShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161261081EA352E800655537 /* ShadowImageView.swift */; };
+		1630F8ED1EB1D35E00DD03E9 /* photoedit_ios_license in Resources */ = {isa = PBXBuildFile; fileRef = 1630F8EC1EB1D35E00DD03E9 /* photoedit_ios_license */; };
 		1634B8771EB118F500FDC95E /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1634B8761EB118F500FDC95E /* CameraButton.swift */; };
 		1634B8791EB13DB300FDC95E /* FadeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1634B8781EB13DB300FDC95E /* FadeSegue.swift */; };
 		1634B87B1EB1859E00FDC95E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1634B87A1EB1859E00FDC95E /* SettingsViewController.swift */; };
@@ -29,6 +30,7 @@
 		161261001EA3043300655537 /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
 		161261061EA34E7000655537 /* ViewImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewImageViewController.swift; sourceTree = "<group>"; };
 		161261081EA352E800655537 /* ShadowImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowImageView.swift; sourceTree = "<group>"; };
+		1630F8EC1EB1D35E00DD03E9 /* photoedit_ios_license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = photoedit_ios_license; sourceTree = "<group>"; };
 		1634B8761EB118F500FDC95E /* CameraButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 		1634B8781EB13DB300FDC95E /* FadeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeSegue.swift; sourceTree = "<group>"; };
 		1634B87A1EB1859E00FDC95E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		16A9DF651E9F4B770048A1A7 /* PicturePerfect */ = {
 			isa = PBXGroup;
 			children = (
+				1630F8EC1EB1D35E00DD03E9 /* photoedit_ios_license */,
 				16A9DF661E9F4B770048A1A7 /* AppDelegate.swift */,
 				16A9DF681E9F4B770048A1A7 /* ViewController.swift */,
 				16A9DF6A1E9F4B770048A1A7 /* Main.storyboard */,
@@ -179,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A9DF741E9F4B770048A1A7 /* LaunchScreen.storyboard in Resources */,
+				1630F8ED1EB1D35E00DD03E9 /* photoedit_ios_license in Resources */,
 				16A9DF711E9F4B770048A1A7 /* Assets.xcassets in Resources */,
 				16A9DF6C1E9F4B770048A1A7 /* Main.storyboard in Resources */,
 			);

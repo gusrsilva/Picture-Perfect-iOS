@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import imglyKit
 
-class ViewImageViewController: UIViewController {
+class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate {
 
     @IBOutlet weak var savedBanner: UILabel!
     @IBOutlet weak var previewImageView: UIImageView!
@@ -30,7 +31,7 @@ class ViewImageViewController: UIViewController {
             previewImageView.image = image
             
             // Flip horizontal to match preview
-            previewImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
+//            previewImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
             
             if(UserDefaults.standard.bool(forKey: AUTO_SAVE_KEY)) {
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -155,5 +156,28 @@ class ViewImageViewController: UIViewController {
     
     @IBAction func editButtonPressed(_ sender: FlatMaterialButton) {
         sender.animatePress()
+        let photoEditViewController = PhotoEditViewController(photo: imageToPreview!)
+        photoEditViewController.delegate = self
+        
+        let toolbarController = ToolbarController()
+        toolbarController.push(photoEditViewController, animated: false)
+        
+        present(toolbarController, animated: true, completion: nil)
     }
+    
+    func photoEditViewControllerDidCancel(_ photoEditViewController: PhotoEditViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func photoEditViewControllerDidFailToGeneratePhoto(_ photoEditViewController: PhotoEditViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func photoEditViewController(_ photoEditViewController: PhotoEditViewController, didSave image: UIImage, and data: Data) {
+        imageToPreview = image
+        previewImageView.image = image
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
 }

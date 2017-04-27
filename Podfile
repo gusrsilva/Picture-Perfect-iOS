@@ -4,7 +4,7 @@
 target 'PicturePerfect' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod ’GoogleMobileVision/FaceDetector'
+#  pod ’GoogleMobileVision/FaceDetector'
   # Pods for PicturePerfect
-
+  pod 'imglyKit', '~> 6.5'
 end

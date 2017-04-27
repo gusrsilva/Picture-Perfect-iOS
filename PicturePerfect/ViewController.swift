@@ -43,7 +43,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var sensThreshCounter: Int = 0
     
     @IBOutlet weak var previewHolder: UIView!
-    
     @IBOutlet weak var cameraButton: CameraButton!
     @IBOutlet weak var moreOptionsButton: MaterialButton!
     @IBOutlet weak var flipCameraButton: MaterialButton!
@@ -173,7 +172,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             } else if(!f.hasSmile) {
                 newLabel = "☹️"
             } else {
-                newLabel = "😁"
+                newLabel = "🐵"
             }
         }
         cameraButton.updateLable(to: newLabel)

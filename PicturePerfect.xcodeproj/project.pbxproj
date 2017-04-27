@@ -376,7 +376,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C2F3E68F07A56730F65CA738 /* Pods-PicturePerfect.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				DEVELOPMENT_TEAM = 7P463YHZ45;
 				INFOPLIST_FILE = PicturePerfect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -390,7 +390,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 04B7D4EE0176ECFE8FD4F920 /* Pods-PicturePerfect.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				DEVELOPMENT_TEAM = 7P463YHZ45;
 				INFOPLIST_FILE = PicturePerfect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

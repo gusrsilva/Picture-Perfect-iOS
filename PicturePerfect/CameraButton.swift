@@ -30,9 +30,9 @@ class CameraButton: MaterialButton {
         shrinkAndGrow(onComplete: onComplete)
         pulse(detectionActive: detectionActive)
         if(detectionActive) {
-            updateLable(to: "😁", overrideTimeCheck: true)
+            updateLable(to: "🐵", overrideTimeCheck: true)
         } else {
-            updateLable(to: "👌", overrideTimeCheck: true)
+            updateLable(to: "🙈", overrideTimeCheck: true)
         }
     }
     

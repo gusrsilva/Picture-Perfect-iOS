@@ -17,6 +17,8 @@ class ViewImageViewController: UIViewController {
     @IBOutlet weak var shareButton: MaterialButton!
     @IBOutlet weak var saveButton: MaterialButton!
     
+    var imageSaved: Bool = false
+    
     var imageToPreview: UIImage?
     
     var buttonsShowingY: CGFloat = CGFloat()
@@ -29,11 +31,16 @@ class ViewImageViewController: UIViewController {
             
             // Flip horizontal to match preview
             previewImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
+            
+            if(UserDefaults.standard.bool(forKey: AUTO_SAVE_KEY)) {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                imageSaved = true
+                savedBanner.text = "Autosaved."
+            }
         } else {
             print("image is nil!")
         }
         initButtonAnimationParams()
-        
     }
     
     func initButtonAnimationParams() {
@@ -44,6 +51,9 @@ class ViewImageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         slideButtonsIn()  // TODO: Add back
         addBlurEffect(to: buttonsHolder)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
     }
     
 
@@ -79,7 +89,8 @@ class ViewImageViewController: UIViewController {
                        completion: { _ in
                         UIView.animate(withDuration: 0.3, delay: 1.0, options: [], animations: {
                             self.savedBanner.frame.origin.y = -80
-                        }, completion: nil)
+                        }, completion: {_ in
+                            })
                         
         })
     }
@@ -91,6 +102,7 @@ class ViewImageViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         } else {
+            imageSaved = true
             showSavedBanner()
         }
     }
@@ -119,7 +131,10 @@ class ViewImageViewController: UIViewController {
 
     @IBAction func saveToCameraRoll(_ sender: MaterialButton) {
         sender.animatePress { _ in
-            if let image = self.imageToPreview {
+            if(self.imageSaved) {
+                self.showSavedBanner()
+            }
+            else if let image = self.imageToPreview {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveAttemptCompleted(_:didFinishSavingWithError:contextInfo:)), nil)
             } else {
                 print("Can't save to camera roll image is nil!")

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate {
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate, UINavigationControllerDelegate {
     
     let detector = CIDetector(ofType: CIDetectorTypeFace, context: CIContext(), options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
 
@@ -22,20 +22,20 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var detectionActive: Bool = false
     
-    // The captured image
+    
     var takenImage = UIImage()
-    
-    // manages real time capture activity from input devices to create output media (photo/video)
     let captureSession = AVCaptureSession()
-    
-    // the device we are capturing media from (i.e. front camera of an iPhone 7)
     var captureDevice : AVCaptureDevice?
-    
-    // view that will let us preview what is being captured from the captureSession
     var previewLayer : AVCaptureVideoPreviewLayer?
-    
-    // Object used to capture a single photo from our capture device
     let photoOutput = AVCapturePhotoOutput()
+    
+    var cameraButtonShowingY: CGFloat = CGFloat()
+    var cameraButtonHiddenY: CGFloat = CGFloat()
+    var flipButtonShowingY: CGFloat = CGFloat()
+    var flipButtonHiddenY: CGFloat = CGFloat()
+    var optionsButtonShowingY: CGFloat = CGFloat()
+    var optionsButtonHiddenY: CGFloat = CGFloat()
+
     
     @IBOutlet weak var previewHolder: UIView!
     
@@ -46,24 +46,45 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.delegate = self
+        
         self.videoDataOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
-        
-        
         self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
         updateCameraSelection()
         setupVideoProcessing()
         setupCameraPreview()
         
-        
+        initButtonAnimationParams()
+
+    }
+    
+    func initButtonAnimationParams() {
+        cameraButtonShowingY = self.cameraButton.frame.origin.y
+        cameraButtonHiddenY = cameraButtonShowingY + 200
+        flipButtonShowingY = self.flipCameraButton.frame.origin.y
+        flipButtonHiddenY = flipButtonHiddenY + 800
+        optionsButtonShowingY = self.moreOptionsButton.frame.origin.y
+        optionsButtonHiddenY = optionsButtonShowingY + 1600
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.captureSession.startRunning()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         slideButtonsIn()
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        viewController.viewWillAppear(animated)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        viewController.viewDidAppear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -80,10 +101,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         if let photoSampleBuffer = photoSampleBuffer {
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             takenImage = UIImage(data: photoData!)!
-//            animatePhotoTaken(onComplete: {self.performSegue(withIdentifier: "cameraToPreview", sender: self)})
-            self.slideButtonsOut(onComplete: { _ in
-                self.performSegue(withIdentifier: "cameraToPreview", sender: self)
-            })
+            animatePhotoTaken()
+            animatedSegue(withIdentifier: "cameraToPreview")
+
         } else {
             print("photoSampleBufferIsNull!")
         }
@@ -240,45 +260,38 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         return nil
     }
     
-    func animatePhotoTaken(onComplete: ((Void) -> Swift.Void)? = nil) {
+    func animatePhotoTaken() {
         UIView.animate(withDuration: 0.2,
                        animations: {
 //                        self.previewHolder.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                         self.previewHolder.alpha = 0.5
-                        self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y + 100
-                        self.flipCameraButton.frame.origin.x = self.flipCameraButton.frame.origin.x - 65
-                        self.moreOptionsButton.frame.origin.x = self.moreOptionsButton.frame.origin.x + 65
-        },
+                        },
                        completion: { _ in
                         UIView.animate(withDuration: 0.2) {
 //                            self.previewHolder.transform = CGAffineTransform.identity
                             self.previewHolder.alpha = 1.0
-                            if let onComplete = onComplete {
-                                onComplete()
-                            }
                         }
                         
         })
     }
     
     func slideButtonsIn() {
-        self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y + 200
-        self.flipCameraButton.frame.origin.y = self.flipCameraButton.frame.origin.y + 800
-        self.moreOptionsButton.frame.origin.y = self.moreOptionsButton.frame.origin.y + 1600
-        
-        UIView.animate(withDuration: 0.4, delay: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y - 200
-            self.flipCameraButton.frame.origin.y = self.flipCameraButton.frame.origin.y - 800
-            self.moreOptionsButton.frame.origin.y = self.moreOptionsButton.frame.origin.y - 1600
+        self.cameraButton.frame.origin.y = self.cameraButtonHiddenY
+        self.flipCameraButton.frame.origin.y = self.flipButtonHiddenY
+        self.moreOptionsButton.frame.origin.y = self.optionsButtonHiddenY
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.cameraButton.frame.origin.y = self.cameraButtonShowingY
+            self.flipCameraButton.frame.origin.y = self.flipButtonShowingY
+            self.moreOptionsButton.frame.origin.y = self.optionsButtonShowingY
         }) { _ in
         }
     }
     
-    func slideButtonsOut(onComplete: ((Void) -> Swift.Void)?) {
+    func slideButtonsOut(onComplete: ((Void) -> Swift.Void)? = nil) {
         UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.cameraButton.frame.origin.y = self.cameraButton.frame.origin.y + 200
-            self.flipCameraButton.frame.origin.y = self.flipCameraButton.frame.origin.y + 800
-            self.moreOptionsButton.frame.origin.y = self.moreOptionsButton.frame.origin.y + 1600
+            self.cameraButton.frame.origin.y = self.cameraButtonHiddenY
+            self.flipCameraButton.frame.origin.y = self.flipButtonHiddenY
+            self.moreOptionsButton.frame.origin.y = self.optionsButtonHiddenY
         }) { _ in
             if let onComplete = onComplete {
                 onComplete()
@@ -288,7 +301,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBAction func moreOptionsPressed(_ sender: MaterialButton) {
         sender.animatePress()
+        animatedSegue(withIdentifier: "cameraToSettings")
     }
+    
     
     @IBAction func cameraButtonPressed(_ sender: CameraButton) {
         detectionActive = !detectionActive
@@ -310,6 +325,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             destination.imageToPreview = takenImage
         } else {
             print("Error converting seque destination to ViewImageViewController")
+        }
+    }
+    
+    func animatedSegue(withIdentifier identifier: String) {
+        DispatchQueue.main.async {
+            self.slideButtonsOut { _ in
+                self.performSegue(withIdentifier: identifier, sender: self)
+            }
         }
     }
 }

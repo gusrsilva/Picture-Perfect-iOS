@@ -18,6 +18,10 @@ class ViewImageViewController: UIViewController {
     
     var imageToPreview: UIImage?
     
+    var shareButtonShowingY: CGFloat = CGFloat()
+    var shareButtonHiddenY: CGFloat = CGFloat()
+    var saveButtonShowingY: CGFloat = CGFloat()
+    var saveButtonHiddenY: CGFloat = CGFloat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,16 @@ class ViewImageViewController: UIViewController {
         } else {
             print("image is nil!")
         }
+        initButtonAnimationParams()
         
+    }
+    
+    func initButtonAnimationParams() {
+        shareButtonShowingY = self.shareButton.frame.origin.y
+        saveButtonShowingY = self.saveButton.frame.origin.y
+        
+        shareButtonHiddenY = shareButtonShowingY + 200
+        saveButtonHiddenY = saveButtonShowingY + 800
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,20 +56,20 @@ class ViewImageViewController: UIViewController {
     }
     
     func slideButtonsIn() {
-        self.shareButton.frame.origin.y = self.shareButton.frame.origin.y + 200
-        self.saveButton.frame.origin.y = self.saveButton.frame.origin.y + 800
+        self.shareButton.frame.origin.y = shareButtonHiddenY
+        self.saveButton.frame.origin.y = saveButtonHiddenY
         
         UIView.animate(withDuration: 0.4, delay: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.shareButton.frame.origin.y = self.shareButton.frame.origin.y - 200
-            self.saveButton.frame.origin.y = self.saveButton.frame.origin.y - 800
+            self.shareButton.frame.origin.y = self.shareButtonShowingY
+            self.saveButton.frame.origin.y = self.saveButtonShowingY
         }) { _ in
         }
     }
     
     func slideButtonsOut(onComplete: ((Void) -> Swift.Void)?) {
         UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.shareButton.frame.origin.y = self.shareButton.frame.origin.y + 200
-            self.saveButton.frame.origin.y = self.saveButton.frame.origin.y + 800
+            self.shareButton.frame.origin.y = self.shareButtonHiddenY
+            self.saveButton.frame.origin.y = self.saveButtonHiddenY
         }) { _ in
             if let onComplete = onComplete {
                 onComplete()

@@ -57,7 +57,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.navigationController?.delegate = self
         
         self.videoDataOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
-        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
         updateCameraSelection()
         setupVideoProcessing()
@@ -103,6 +102,10 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func viewDidDisappear(_ animated: Bool) {
         self.captureSession.stopRunning()
+        if(detectionActive) {
+            detectionActive = false
+            cameraButton.animatePress(detectionActive: detectionActive)
+        }
     }
     
     
@@ -228,13 +231,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func setupCameraPreview() {
+        self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
         self.previewLayer?.frame = view.layer.frame
         self.previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         self.previewHolder.layer.masksToBounds = true
         self.previewHolder.layer.addSublayer(self.previewLayer!)
-        self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto
-//        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
         self.captureSession.startRunning()
     }
     
@@ -337,6 +339,17 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     @IBAction func cameraButtonPressed(_ sender: CameraButton) {
         detectionActive = !detectionActive
         sender.animatePress(detectionActive: detectionActive)
+        if(detectionActive) {
+            self.flipCameraButton.isEnabled = false
+            self.moreOptionsButton.isEnabled = false
+            self.flipCameraButton.alpha = 0.2
+            self.moreOptionsButton.alpha = 0.2
+        } else {
+            self.flipCameraButton.isEnabled = true
+            self.moreOptionsButton.isEnabled = true
+            self.flipCameraButton.alpha = 1.0
+            self.moreOptionsButton.alpha = 1.0
+        }
     }
     
     @IBAction func flipCameraButtonPressed(_ sender: MaterialButton) {

@@ -323,8 +323,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ViewImageViewController {
             destination.imageToPreview = takenImage
-        } else {
-            print("Error converting seque destination to ViewImageViewController")
         }
     }
     

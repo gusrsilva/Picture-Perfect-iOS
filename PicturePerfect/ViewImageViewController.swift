@@ -25,7 +25,6 @@ class ViewImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let image = imageToPreview {
             previewImageView.image = image
             

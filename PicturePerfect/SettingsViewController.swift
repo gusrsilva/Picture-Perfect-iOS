@@ -10,12 +10,19 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
+    @IBOutlet weak var autoSavePhotosSwitch: UISwitch!
+    @IBOutlet weak var sensitivitySlider: UISlider!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        // TODO: Load settings
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // TODO: Save settings
     }
 
     

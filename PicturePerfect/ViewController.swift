@@ -41,7 +41,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var sensitivity: Int = 1
     var sensThreshCounter: Int = 0
-
     
     @IBOutlet weak var previewHolder: UIView!
     
@@ -63,7 +62,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         setupCameraPreview()
         
         initButtonAnimationParams()
-
     }
     
     func initButtonAnimationParams() {
@@ -375,5 +373,55 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             }
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let cameraView: UIView = previewHolder!
+        let touchPoint = (touches.first! as UITouch).location(in: cameraView)
+        let screenSize = cameraView.bounds.size
+        let x: CGFloat = touchPoint.y / screenSize.height
+        var y: CGFloat = touchPoint.x / screenSize.width
+        if(cameraPosition == AVCaptureDevicePosition.back) {
+            y = 1.0 - y
+        }
+        
+        let focusPoint = CGPoint(x: x, y: y)
+        drawFocusRect(at: touchPoint)
+        
+        
+        if let device = captureDevice {
+            do {
+                try device.lockForConfiguration()
+                if device.isFocusPointOfInterestSupported {
+                    device.focusPointOfInterest = focusPoint
+                    device.focusMode = AVCaptureFocusMode.autoFocus
+                }
+                if device.isExposurePointOfInterestSupported {
+                    device.exposurePointOfInterest = focusPoint
+                    device.exposureMode = AVCaptureExposureMode.autoExpose
+                }
+                device.unlockForConfiguration()
+                
+            } catch {
+                print("Errors")
+                // Handle errors here
+            }
+        }
+    }
+    
+    func drawFocusRect(at touchPoint: CGPoint) {
+        let size:CGFloat = 50
+        let focusRect: UIView = UIView(frame: CGRect(x: touchPoint.x - size/2, y: touchPoint.y - size/2, width: size, height: size))
+        focusRect.layer.borderWidth = 1
+        focusRect.layer.borderColor = UIColor.white.cgColor
+        previewHolder!.addSubview(focusRect)
+        
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: UIViewAnimationOptions.autoreverse, animations: {
+            focusRect.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        }) { _ in
+            focusRect.removeFromSuperview()
+        }
+
+    }
+    
 }
 

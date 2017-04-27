@@ -35,6 +35,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var flipButtonHiddenY: CGFloat = CGFloat()
     var optionsButtonShowingY: CGFloat = CGFloat()
     var optionsButtonHiddenY: CGFloat = CGFloat()
+    
+    var willAppearHandled = false
+    var didAppearHandled = false
+    
+    var sensitivity: Int = 1
+    var sensThreshCounter: Int = 0
 
     
     @IBOutlet weak var previewHolder: UIView!
@@ -71,20 +77,28 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        willAppearHandled = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.captureSession.startRunning()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        didAppearHandled = true
         slideButtonsIn()
+        sensitivity = getSensitivity()
+        sensThreshCounter = 0
     }
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        viewController.viewWillAppear(animated)
+        if(!willAppearHandled) {
+            self.viewWillAppear(animated)
+        }
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        viewController.viewDidAppear(animated)
+        if(!didAppearHandled) {
+            self.viewDidAppear(animated)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -94,6 +108,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func getSensitivity() -> Int {
+        let floatSens = UserDefaults.standard.float(forKey: SENSITIVITY_KEY)
+        return  10 - Int(floatSens*10)
     }
 
     
@@ -120,9 +139,17 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             let features = detector.features(in: ciimage, options: [CIDetectorEyeBlink: true, CIDetectorSmile: true, CIDetectorImageOrientation: orientation]) as! [CIFaceFeature]
             for f in features {
                 if(f.hasSmile && !f.leftEyeClosed && !f.rightEyeClosed) {
-                    takePhoto()
+                    if(sensThreshCounter >= sensitivity) {
+                        takePhoto()
+                    } else {
+                        sensThreshCounter += 1
+                    }
                 } else {
                     updateCameraButtonHint(face: f)
+                    sensThreshCounter -= 1
+                    if(sensThreshCounter < 0) {
+                        sensThreshCounter = 0
+                    }
                 }
             }
             if(features.count == 0) {

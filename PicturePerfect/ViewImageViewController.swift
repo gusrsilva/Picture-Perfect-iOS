@@ -9,39 +9,75 @@
 import UIKit
 import imglyKit
 
-class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate {
+class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate, CAAnimationDelegate {
 
-    @IBOutlet weak var savedBanner: UILabel!
     @IBOutlet weak var previewImageView: UIImageView!
     
     @IBOutlet weak var buttonsHolder: UIView!
     @IBOutlet weak var shareButton: MaterialButton!
     @IBOutlet weak var saveButton: MaterialButton!
     
+    
+    @IBOutlet weak var checkboxHolder: UIView!
+    @IBOutlet weak var savedToast: UIVisualEffectView!
+    @IBOutlet weak var savedToastMessage: UILabel!
+    
     var imageSaved: Bool = false
-    
     var imageToPreview: UIImage?
-    
     var buttonsShowingY: CGFloat = CGFloat()
     var buttonsHiddenY: CGFloat = CGFloat()
+    var checkMarkPathLayer = CAShapeLayer()
+    var pathAnimation = CABasicAnimation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let image = imageToPreview {
             previewImageView.image = image
-            
-            // Flip horizontal to match preview
-//            previewImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
-            
-            if(UserDefaults.standard.bool(forKey: AUTO_SAVE_KEY)) {
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                imageSaved = true
-                savedBanner.text = "Autosaved."
-            }
         } else {
             print("image is nil!")
         }
         initButtonAnimationParams()
+        initSavedToast()
+    }
+    
+    func initSavedToast() {
+        savedToast.clipsToBounds = true
+        savedToast.layer.cornerRadius = 12
+        savedToast.alpha = 0.0
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: checkboxHolder.bounds.maxY * 2 / 3))
+        path.addLine(to: CGPoint(x: checkboxHolder.bounds.maxX / 3, y: checkboxHolder.bounds.maxY))
+        path.addLine(to: CGPoint(x: checkboxHolder.bounds.maxX, y: 0))
+        
+        checkMarkPathLayer = CAShapeLayer()
+        checkMarkPathLayer.frame = checkboxHolder.bounds
+        checkMarkPathLayer.path = path.cgPath
+        checkMarkPathLayer.strokeColor = UIColor.red.cgColor
+        checkMarkPathLayer.fillColor = nil
+        checkMarkPathLayer.lineWidth = 2
+        checkMarkPathLayer.lineJoin = kCALineJoinBevel
+        
+        pathAnimation = CABasicAnimation(keyPath:"strokeEnd")
+        pathAnimation.duration = 0.3
+        pathAnimation.fromValue = NSNumber(floatLiteral: 0)
+        pathAnimation.toValue = NSNumber(floatLiteral: 1)
+        pathAnimation.delegate = self
+
+    }
+    
+    func showSavedToast() {
+        checkboxHolder.layer.addSublayer(checkMarkPathLayer)
+        checkMarkPathLayer.removeAllAnimations()
+        savedToast.alpha = 1.0
+        checkMarkPathLayer.add(pathAnimation, forKey:"strokeEnd")
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.savedToast.alpha = 0.0
+            self.checkMarkPathLayer.removeFromSuperlayer()
+        }
     }
     
     func initButtonAnimationParams() {
@@ -52,6 +88,12 @@ class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate
     override func viewWillAppear(_ animated: Bool) {
         slideButtonsIn()  // TODO: Add back
         addBlurEffect(to: buttonsHolder)
+        if let image = imageToPreview {
+            if(UserDefaults.standard.bool(forKey: AUTO_SAVE_KEY)) {
+                savedToastMessage.text = "Autosaved"
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveAttemptCompleted(_:didFinishSavingWithError:contextInfo:)), nil)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,21 +123,6 @@ class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate
         }
     }
     
-    
-    func showSavedBanner() {
-        UIView.animate(withDuration: 0.3,
-                       animations: {
-                        self.savedBanner.frame.origin.y = 0
-        },
-                       completion: { _ in
-                        UIView.animate(withDuration: 0.3, delay: 1.0, options: [], animations: {
-                            self.savedBanner.frame.origin.y = -80
-                        }, completion: {_ in
-                            })
-                        
-        })
-    }
-    
     func saveAttemptCompleted(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             // we got back an error!
@@ -104,7 +131,7 @@ class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate
             present(ac, animated: true)
         } else {
             imageSaved = true
-            showSavedBanner()
+            showSavedToast()
         }
     }
     
@@ -133,7 +160,7 @@ class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate
     @IBAction func saveToCameraRoll(_ sender: MaterialButton) {
         sender.animatePress { _ in
             if(self.imageSaved) {
-                self.showSavedBanner()
+                self.showSavedToast()
             }
             else if let image = self.imageToPreview {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveAttemptCompleted(_:didFinishSavingWithError:contextInfo:)), nil)

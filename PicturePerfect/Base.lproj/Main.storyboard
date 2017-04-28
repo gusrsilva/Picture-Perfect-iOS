@@ -370,14 +370,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X0c-G1-BVn" customClass="ShadowImageView" customModule="PicturePerfect" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saved!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEV-X6-hI5">
-                                <rect key="frame" x="0.0" y="-80" width="375" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.93367225789999997" blue="0.56963433159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNv-Uo-eGp" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
                                 <rect key="frame" x="8" y="20" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -425,6 +417,41 @@
                                     </button>
                                 </subviews>
                             </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j21-fz-hpS">
+                                <rect key="frame" x="97" y="243" width="180" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="BPe-3l-cIe">
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZu-Eu-hnq">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="qKk-70-U9l">
+                                                <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saved" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hja-d8-Tpg">
+                                                        <rect key="frame" x="0.0" y="128" width="180" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IKZ-U0-wpK">
+                                                        <rect key="frame" x="56" y="38" width="69.999999999999545" height="65"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </view>
+                                                </subviews>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -436,9 +463,11 @@
                     </view>
                     <connections>
                         <outlet property="buttonsHolder" destination="ZZU-5w-mhT" id="6Bl-gm-zNV"/>
+                        <outlet property="checkboxHolder" destination="IKZ-U0-wpK" id="kOm-3q-vQ2"/>
                         <outlet property="previewImageView" destination="X0c-G1-BVn" id="3oQ-Ar-0ut"/>
                         <outlet property="saveButton" destination="Pqd-HI-lbc" id="QWD-a0-Gqy"/>
-                        <outlet property="savedBanner" destination="mEV-X6-hI5" id="pyA-8J-SIr"/>
+                        <outlet property="savedToast" destination="j21-fz-hpS" id="CwK-eo-bRt"/>
+                        <outlet property="savedToastMessage" destination="Hja-d8-Tpg" id="jdj-no-isc"/>
                         <outlet property="shareButton" destination="WHP-19-EEK" id="uoy-W0-PCR"/>
                         <segue destination="rvA-qM-rcd" kind="showDetail" identifier="previewToCamera" animates="NO" id="M6m-RA-SSX"/>
                     </connections>

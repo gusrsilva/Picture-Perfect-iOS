@@ -416,21 +416,21 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSf-0z-Lzk">
-                                <rect key="frame" x="0.0" y="581" width="375" height="86"/>
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="nbR-pZ-qhb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NKE-WA-z8x">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="VCN-3t-MPS">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgk-qe-C6E" userLabel="Edit Button" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
-                                                        <rect key="frame" x="258" y="13" width="60" height="60"/>
+                                                        <rect key="frame" x="258" y="1.452926919385618" width="60.000000000000227" height="60"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680649999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -440,7 +440,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85z-y0-2Hu" userLabel="Save Button" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
-                                                        <rect key="frame" x="157" y="13" width="60" height="60"/>
+                                                        <rect key="frame" x="156.99999999999977" y="1.452926919385618" width="60.000000000000227" height="60"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680649999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -450,7 +450,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ss0-iO-ane" userLabel="Share Button" customClass="FlatMaterialButton" customModule="PicturePerfect" customModuleProvider="target">
-                                                        <rect key="frame" x="57" y="13" width="60" height="60"/>
+                                                        <rect key="frame" x="57" y="1.452926919385618" width="60" height="60"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.10185680649999999" colorSpace="custom" customColorSpace="sRGB"/>

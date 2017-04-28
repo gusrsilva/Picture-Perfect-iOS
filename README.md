@@ -23,7 +23,7 @@ Press the large button when you are ready to activate the detector.
 
 ![Detector Active](/images/mockup/detector_active.png)
 
-The button will change colors and begin pulsing the let you know detection is active. Different emoji hints will also appear. The two side buttons are disabled and made semi transparent to improve preview visibility. Now all you have to do is smile and the detector will recognize this and automatically take the picture!
+The button will change color and begin pulsing the let you know detection is active. Different emoji hints will also appear. The two side buttons are disabled and made semi transparent to improve preview visibility. Now all you have to do is smile and the detector will recognize this and automatically take the picture!
 
 ### Viewing, Sharing, Saving, & Editing Your Photos
 
@@ -35,10 +35,11 @@ Here, you can use the buttons in the bottom toolbar to (from left to right) shar
 
 ![Share Photo](/images/mockup/share.png)![Save Photo](/images/mockup/saved.png)![Edit Photo](/images/mockup/editor.png)
 
+Once you are done viewing the image and want to return to the camera, simply press the back button in the top left corner.
+
 ### Settings
 
-As previously mentioned, you can press the button with the three dots to open the
-settings page.
+As previously mentioned, on the main screen you can press the button with the three dots to open the settings page.
 
 ![Settings Page](/images/mockup/settings.png)
 
@@ -49,8 +50,7 @@ saving and adjust the detector's sensitivity.
 
 ### Future Improvements
 
-First of all, I am always open to suggestions and would love to hear ideas on how
-I could improve the app!
+I am always open to suggestions and would love to hear ideas on how I could improve the app!
 
 Some things I plan to add in the future are:
 * Improve detector performance with multiple faces

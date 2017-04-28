@@ -13,10 +13,7 @@ class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate
 
     @IBOutlet weak var previewImageView: UIImageView!
     
-    @IBOutlet weak var buttonsHolder: UIView!
-    @IBOutlet weak var shareButton: MaterialButton!
-    @IBOutlet weak var saveButton: MaterialButton!
-    
+    @IBOutlet weak var buttonsHolder: UIVisualEffectView!
     
     @IBOutlet weak var checkboxHolder: UIView!
     @IBOutlet weak var savedToast: UIVisualEffectView!
@@ -87,7 +84,6 @@ class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         slideButtonsIn()  // TODO: Add back
-        addBlurEffect(to: buttonsHolder)
         if let image = imageToPreview {
             if(UserDefaults.standard.bool(forKey: AUTO_SAVE_KEY)) {
                 savedToastMessage.text = "Autosaved"
@@ -133,21 +129,6 @@ class ViewImageViewController: UIViewController, PhotoEditViewControllerDelegate
             imageSaved = true
             showSavedToast()
         }
-    }
-    
-    func addBlurEffect(to view: UIView) {
-        let blurrEffect  = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurrEffect)
-        blurEffectView.frame = view.bounds
-        
-        
-        let vibrancyEffectView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: blurrEffect))
-        vibrancyEffectView.frame = view.bounds
-
-        
-        blurEffectView.addSubview(vibrancyEffectView)
-        view.addSubview(blurEffectView)
-        view.sendSubview(toBack: blurEffectView)
     }
     
     @IBAction func backPressed(_ sender: MaterialButton) {
